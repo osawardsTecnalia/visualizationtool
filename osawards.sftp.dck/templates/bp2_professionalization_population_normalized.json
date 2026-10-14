@@ -1,0 +1,71 @@
+[
+  {
+    "mappings": {
+      "properties": {
+        "country_code": {
+          "type": "keyword"
+        },
+        "repo_ownership_intensity": {
+          "type": "float"
+        },
+        "pop_total_wdi": {
+          "type": "float"
+        },
+        "expected_value": {
+          "type": "float"
+        },
+        "pct_above_expected": {
+          "type": "float"
+        }
+      }
+    },
+    "expected_fields": [
+      "country_code",
+      "repo_ownership_intensity",
+      "pop_total_wdi",
+      "expected_value",
+      "pct_above_expected"
+    ],
+    "filters": {
+      "countries": true,
+      "lower_year_limit": -1,
+      "upper_year_limit": -1
+    },
+    "country_limit": 30
+  },
+  {
+    "type": "index-pattern",
+    "index-pattern": {
+      "title": "bp2_professionalization_population_normalized_index",
+      "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"country_code\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country_code.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"country\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"repo_ownership_intensity\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"pop_total_wdi\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"expected_value\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"pct_above_expected\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+    }
+  },
+  {
+    "type": "visualization",
+    "visualization": {
+      "title": "Professionalization: EU-27 Normalized by Population Size",
+      "visState": "{\"title\": \"Professionalization: EU-27 Normalized by Population Size\",\"type\": \"horizontal_bar\",\"params\": {\"type\": \"histogram\",\"grid\": {\"categoryLines\": false,\"style\": {\"color\": \"#eee\"},\"valueAxis\": \"ValueAxis-1\"},\"categoryAxes\": [{\"id\": \"CategoryAxis-1\",\"type\": \"category\",\"position\": \"left\",\"show\": true,\"style\": {},\"scale\": {\"type\": \"linear\"},\"labels\": {\"show\": true,\"rotate\": 0,\"filter\": false,\"truncate\": 200},\"title\": {}}],\"valueAxes\": [{\"id\": \"ValueAxis-1\",\"name\": \"LeftAxis-1\",\"type\": \"value\",\"position\": \"bottom\",\"show\": true,\"style\": {},\"scale\": {\"type\": \"linear\",\"mode\": \"normal\",\"setYExtents\": false},\"labels\": {\"show\": true,\"rotate\": 75,\"filter\": true,\"truncate\": 100},\"title\": {\"text\": \"Above/Below Expected Given Population Size (%)\"}}],\"seriesParams\": [{\"show\": true,\"type\": \"histogram\",\"mode\": \"normal\",\"data\": {\"label\": \"Above/Below Expected Given Population Size (%)\",\"id\": \"1\"},\"valueAxis\": \"ValueAxis-1\",\"drawLinesBetweenPoints\": true,\"showCircles\": true}],\"addTooltip\": true,\"addLegend\": true,\"legendPosition\": \"right\",\"times\": [],\"addTimeMarker\": false},\"aggs\": [{\"id\": \"1\",\"enabled\": true,\"type\": \"sum\",\"schema\": \"metric\",\"params\": {\"field\": \"pct_above_expected\",\"customLabel\": \"Above/Below Expected Given Population Size (%)\"}},{\"id\": \"2\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"segment\",\"params\": {\"field\": \"country.keyword\",\"size\": 30,\"order\": \"desc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Country\"}}]}",
+      "uiStateJSON": "{\"vis\": {\"legendOpen\": false}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\": \"bp2_professionalization_population_normalized_index\",\"query\": {\"query\": \"\",\"language\": \"lucene\"},\"filter\": []}"
+      }
+    }
+  },
+  {
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Dashboard_Professionalization: EU-27 Normalized by Population Size",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"gridData\": {\"w\": 24,\"h\": 15,\"x\": 0,\"y\": 0,\"i\": \"1\"},\"version\": \"6.8.6\",\"panelIndex\": \"1\",\"type\": \"visualization\",\"id\": \"Professionalization: EU-27 Normalized by Population Size\",\"embeddableConfig\": {}}]",
+      "optionsJSON": "{\"darkTheme\": false, \"useMargins\": true, \"hidePanelTitles\": false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"\"}}"
+      }
+    }
+  }
+]

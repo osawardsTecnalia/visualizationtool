@@ -1,0 +1,9 @@
+**/.settings
+**/.vscode
+**/*.class
+**/*.lock
+**/*.coverage
+**/__pycache__/
+**/.pytest_cache/
+**/volumes/
+**/letsencrypt

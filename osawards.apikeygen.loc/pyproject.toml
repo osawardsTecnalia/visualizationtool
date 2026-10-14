@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "api_key_generator"
+version = "1.0.0"
+description = "OSAwards API Key Generator"
+authors = ["Alberto Molinuevo Martin <alberto.molinuevo@tecnalia.com>"]
+package-mode = false
+
+# Dependencies
+[tool.poetry.dependencies]
+python = "^3.12"
+python-jose = { extras = ["cryptography"], version = "^3.3.0" }

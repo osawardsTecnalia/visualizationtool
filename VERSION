@@ -1,0 +1,17 @@
+------------------------------
+VT version: 0.9.0
+------------------------------
+
+Python key dependencies:
+------------------------------
+beautifulsoup4:4.15.0
+docker:7.1.0
+fastapi:0.128.0
+pandas:3.0
+paramiko:3.5.0
+pydantic:2.12.5
+python-jose:extras["cryptography"]:3.3.0
+python-multipart:0.0.21
+requests:2.31.0
+uvicorn:0.40.0
+Werkzeug:3.1.3

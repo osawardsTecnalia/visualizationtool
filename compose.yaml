@@ -1,0 +1,297 @@
+####################
+##### SERVICES #####
+####################
+services:
+  # SFTP Server
+  sftp:
+    container_name: ${SFTP_CONTEXT}
+    image: ${SFTP_IMAGE}
+    build:
+      context: ${SFTP_CONTEXT}
+      dockerfile: Dockerfile
+      args:
+        - SFTP_ROOT_DIRECTORY=${SFTP_ROOT_DIRECTORY}
+        - SFTP_GROUPNAME=${SFTP_GROUPNAME}
+        - SFTP_USERNAME=${SFTP_USERNAME}
+        - SFTP_PASSWORD=${SFTP_PASSWORD}
+        - SFTP_UID_GID=${SFTP_UID_GID}
+    env_file:
+      - .env-sftp
+    networks:
+      network:
+        ipv4_address: ${SFTP_IP}
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost ${SFTP_PORT} || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 1
+
+  # Elasticsearch
+  elasticsearch:
+    image: ${ES_IMAGE}
+    container_name: ${ES_CONTEXT}
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    env_file:
+      - .env-elasticsearch
+    expose:
+      - ${ES_PORT}
+    networks:
+      network:
+        ipv4_address: ${ES_IP}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:${ES_PORT}/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  # Kibiter
+  kibiter:
+    image: ${KIBITER_IMAGE}
+    container_name: ${KIBITER_CONTEXT}
+    environment:
+      - ELASTICSEARCH_URL=http://osawards.elastic.dck:9200
+      - NODE_OPTIONS=--max-old-space-size=1000
+      - SERVER_NAME=kibiter
+      - XPACK_GRAPH_ENABLED=false
+      - XPACK_MONITORING_ENABLED=false
+      - XPACK_REPORTING_ENABLED=false
+      - XPACK_SECURITY_ENABLED=false
+      - PROJECT_NAME=OSAwards
+    env_file:
+      - .env-kibiter
+    expose:
+      - ${KIBITER_PORT}
+    networks:
+      network:
+        ipv4_address: ${KIBITER_IP}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "${KIBITER_STATUS}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kibiter.rule=Host(`${KIBITER_TRAEFIK_HOST}`)"
+      - "traefik.http.routers.kibiter.tls=true"
+      - "traefik.http.routers.kibiter.entrypoints=websecure"
+      - "traefik.http.routers.kibiter.tls.certresolver=myresolver"
+      - "traefik.http.services.kibiter.loadbalancer.server.port=${KIBITER_PORT}"
+
+  # Data collector
+  datacollector:
+    image: ${DC_IMAGE}
+    container_name: ${DC_CONTEXT}
+    build:
+      context: ${DC_CONTEXT}
+      dockerfile: Dockerfile
+    environment:
+      - ELASTICSEARCH_URL=http://osawards.elastic.dck:9200
+      - KIBITER_URL=http://osawards.kibiter.dck:5601
+      - LOCAL_TEMPLATES_DIRECTORY=templates
+      - LOCAL_METRICS_DIRECTORY=data/metrics
+      - LOCAL_USER_STORIES_DIRECTORY=data/user_stories
+      - LOCAL_REPORTS_DIRECTORY=data/reports
+      - SFTP_TEMPLATES_DIRECTORY=/templates
+      - SFTP_HOST=osawards.sftp.dck
+      - SFTP_PORT=2238
+      - SFTP_USERNAME=adminsftp
+      - SFTP_PASSWORD=PWDSFTP
+      - SFTP_TIMEOUT=600
+      - SFTP_METRICS_DIRECTORY=/metrics
+    env_file:
+      - .env-datacollector
+    networks:
+      network:
+        ipv4_address: ${DC_IP}
+    healthcheck:
+      test: ["CMD-SHELL", "exit 0"]
+    depends_on:
+      - sftp
+      - elasticsearch
+      - kibiter
+
+  # API Gateway
+  gateway:
+    container_name: ${GATEWAY_CONTEXT}
+    image: ${GATEWAY_IMAGE}
+    build:
+      context: ${GATEWAY_CONTEXT}
+      dockerfile: Dockerfile
+    env_file:
+      - .env-sftp
+      - .env-gateway
+      - .env-datacollector
+    command: sh -c "echo Waiting to SFTP Server... && sleep 2 && echo OK"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "${GATEWAY_HELLO}"]
+      interval: 60s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    environment:
+      - SFTP_HOST=${SFTP_CONTEXT}
+      - SFTP_PORT=${SFTP_PORT}
+      - SFTP_USERNAME=${SFTP_USERNAME}
+      - SFTP_PASSWORD=${SFTP_PASSWORD}
+      - SFTP_TIMEOUT=${SFTP_TIMEOUT}
+      - SFTP_DIR_METRICS=${SFTP_DIR_METRICS}
+      - CONTAINER_DATA_COLLECTOR=${DC_CONTEXT}
+    networks:
+      network:
+        ipv4_address: ${GATEWAY_IP}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      sftp:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api-input.rule=Host(`${GATEWAY_TRAEFIK_HOST}`) && (PathPrefix(`${GATEWAY_TRAEFIK_PATH_PREFIX_API}`) || PathPrefix(`${GATEWAY_TRAEFIK_PATH_PREFIX_DOCS}`))"
+      - "traefik.http.routers.api-input.tls=true"
+      - "traefik.http.routers.api-input.entrypoints=websecure"
+  
+  # Framework (VT Frontend)
+  framework:
+    container_name: ${FRAMEWORK_CONTEXT}
+    image: ${FRAMEWORK_IMAGE}
+    build:
+      context: ${FRAMEWORK_CONTEXT}
+      dockerfile: Dockerfile
+    env_file:
+      - .env-framework
+    networks:
+      network:
+        ipv4_address: ${FRAMEWORK_IP}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      kibiter:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test-frontend.rule=Host(`${FRAMEWORK_TRAEFIK_HOST}`) && PathPrefix(`${FRAMEWORK_TRAEFIK_PATH_PREFIX}`)"
+      - "traefik.http.routers.test-frontend.tls=true"
+      - "traefik.http.routers.test-frontend.entrypoints=websecure"
+      - "traefik.http.routers.test-frontend.tls.certresolver=myresolver"
+      - "traefik.http.services.test-frontend.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.front-strip.stripprefix.prefixes=${FRAMEWORK_TRAEFIK_PATH_PREFIX}"
+      - "traefik.http.routers.test-frontend.middlewares=front-strip"
+  
+  # Reverse proxy
+  proxy:
+    image: ${TRAEFIK_IMAGE}
+    container_name: ${TRAEFIK_CONTEXT}
+    restart: always
+    env_file:
+      - .env-traefik
+    command:
+      - "--ping=true"
+      - "--ping.entrypoint=traefik"
+      - "--entrypoints.traefik.address=:${TRAEFIK_PORT_PING}"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:${TRAEFIK_PORT_INSECURE}"
+      - "--entryPoints.websecure.address=:${TRAEFIK_PORT_SECURE}"
+      - "--entrypoints.websecure.http.tls=true"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=${TRAEFIK_EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - ${TRAEFIK_PORT_INSECURE}:${TRAEFIK_PORT_INSECURE}
+      - ${TRAEFIK_PORT_SECURE}:${TRAEFIK_PORT_SECURE}
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      network:
+        ipv4_address: ${TRAEFIK_IP}
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:${TRAEFIK_PORT_PING}/ping"]
+    depends_on:
+      - elasticsearch
+      - kibiter
+      - gateway
+      - framework
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=default"
+      - "traefik.http.routers.dashboard-api.rule=Host(`${TRAEFIK_DASHBOARD_HOST}`)"
+      - "traefik.http.routers.dashboard-api.entrypoints=websecure"
+      - "traefik.http.routers.dashboard-api.service=api@internal"
+
+  # Portainer
+  portainer:
+    container_name: ${PORTAINER_CONTEXT}
+    image: ${PORTAINER_IMAGE}
+    build:
+      context: ${PORTAINER_CONTEXT}
+      dockerfile: Dockerfile
+      args:
+        - PORTAINER_ROOT_USER=${PORTAINER_ROOT_USER}
+    restart: unless-stopped
+    command: --admin-password '${PORTAINER_PASSWORD}'
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - ${PORTAINER_PORT_SECURE}:${PORTAINER_PORT_SECURE}
+    env_file:
+      - .env-portainer
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:${PORTAINER_PORT_INSECURE} || exit 1"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+    networks:
+      network:
+        ipv4_address: ${PORTAINER_IP}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./volumes/portainer-data:/data
+    depends_on:
+      sftp:
+        condition: service_healthy
+      gateway:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      kibiter:
+        condition: service_healthy
+      framework:
+        condition: service_healthy
+
+
+###################
+##### VOLUMES #####
+###################
+volumes:
+  esdata:
+    name: es_data
+
+
+####################
+##### NETWORKS #####
+####################
+networks:
+    network:
+        ipam:
+            config:
+                - subnet: 10.100.1.0/24

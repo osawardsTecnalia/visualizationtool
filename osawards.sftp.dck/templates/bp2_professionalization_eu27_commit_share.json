@@ -1,0 +1,63 @@
+[
+  {
+    "mappings": {
+      "properties": {
+        "country_code": {
+          "type": "keyword"
+        },
+        "total_commits": {
+          "type": "float"
+        },
+        "share_pct": {
+          "type": "float"
+        }
+      }
+    },
+    "expected_fields": [
+      "country_code",
+      "total_commits",
+      "share_pct"
+    ],
+    "filters": {
+      "countries": true,
+      "lower_year_limit": -1,
+      "upper_year_limit": -1
+    },
+    "country_limit": 30
+  },
+  {
+    "type": "index-pattern",
+    "index-pattern": {
+      "title": "bp2_professionalization_eu27_commit_share_index",
+      "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"country_code\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country_code.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"country\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"total_commits\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"share_pct\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+    }
+  },
+  {
+    "type": "visualization",
+    "visualization": {
+      "title": "Professionalization: Share of GitHub Commits by EU-27 Countries in 2023",
+      "visState": "{\"title\": \"Professionalization: Share of GitHub Commits by EU-27 Countries in 2023\",\"type\": \"horizontal_bar\",\"params\": {\"addLegend\": true,\"addTimeMarker\": false,\"addTooltip\": true,\"categoryAxes\": [{\"id\": \"CategoryAxis-1\",\"labels\": {\"filter\": false,\"rotate\": 0,\"show\": true,\"truncate\": 200},\"position\": \"left\",\"scale\": {\"type\": \"linear\"},\"show\": true,\"style\": {},\"title\": {},\"type\": \"category\"}],\"grid\": {\"categoryLines\": false,\"style\": {\"color\": \"#eee\"},\"valueAxis\": \"ValueAxis-1\"},\"legendPosition\": \"right\",\"seriesParams\": [{\"data\": {\"id\": \"1\",\"label\": \"Share of EU-27 Total Commits (%)\"},\"drawLinesBetweenPoints\": true,\"mode\": \"normal\",\"show\": true,\"showCircles\": true,\"type\": \"histogram\",\"valueAxis\": \"ValueAxis-1\"}],\"times\": [],\"type\": \"histogram\",\"valueAxes\": [{\"id\": \"ValueAxis-1\",\"labels\": {\"filter\": true,\"rotate\": 75,\"show\": true,\"truncate\": 100},\"name\": \"LeftAxis-1\",\"position\": \"bottom\",\"scale\": {\"mode\": \"normal\",\"type\": \"linear\"},\"show\": true,\"style\": {},\"title\": {\"text\": \"Share of EU-27 Total Commits (%)\"},\"type\": \"value\"}]},\"aggs\": [{\"id\": \"1\",\"enabled\": true,\"type\": \"sum\",\"schema\": \"metric\",\"params\": {\"field\": \"share_pct\",\"customLabel\": \"Share of EU-27 Total Commits (%)\"}},{\"id\": \"2\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"segment\",\"params\": {\"field\": \"country.keyword\",\"size\": 30,\"order\": \"desc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Country\"}}]}",
+      "uiStateJSON": "{\"vis\": {\"legendOpen\": false}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\": \"bp2_professionalization_eu27_commit_share_index\",\"query\": {\"language\": \"lucene\",\"query\": \"\"},\"filter\": []}"
+      }
+    }
+  },
+  {
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Dashboard_Professionalization: Share of GitHub Commits by EU-27 Countries in 2023",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"gridData\": {\"w\": 24,\"h\": 15,\"x\": 0,\"y\": 0,\"i\": \"1\"},\"version\": \"6.8.6\",\"panelIndex\": \"1\",\"type\": \"visualization\",\"id\": \"Professionalization: Share of GitHub Commits by EU-27 Countries in 2023\",\"embeddableConfig\": {}}]",
+      "optionsJSON": "{\"darkTheme\": false, \"useMargins\": true, \"hidePanelTitles\": false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"\"}}"
+      }
+    }
+  }
+]

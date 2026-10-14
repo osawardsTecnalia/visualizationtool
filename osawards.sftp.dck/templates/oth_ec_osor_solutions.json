@@ -1,0 +1,79 @@
+[
+  {
+    "mappings": {
+      "properties": {
+        "country_code": {
+          "type": "keyword"
+        },
+        "year": {
+          "type": "long"
+        },
+        "name": {
+          "type": "keyword"
+        },
+        "description": {
+          "type": "keyword"
+        },
+        "primary_topic": {
+          "type": "keyword"
+        },
+        "secondary_topic": {
+          "type": "keyword"
+        },
+        "status_flag": {
+          "type": "float"
+        }
+      }
+    },
+    "expected_fields": [
+      "country_code",
+      "year",
+      "name",
+      "description",
+      "primary_topic",
+      "secondary_topic",
+      "status_flag"
+    ],
+    "filters": {
+      "countries": true,
+      "lower_year_limit": 2014,
+      "upper_year_limit": 2026
+    },
+    "country_limit": 27
+  },
+  {
+    "type": "index-pattern",
+    "index-pattern": {
+      "title": "oth_ec_osor_solutions_index",
+      "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"country_code\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country_code.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"country\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"name.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"description.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"primary_topic.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"secondary_topic.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"year\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"status_flag\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+    }
+  },
+  {
+    "type": "visualization",
+    "visualization": {
+      "title": "EC OSOR Solutions",
+      "visState": "{\"title\": \"EC OSOR Solutions\",\"type\": \"table\",\"params\": {\"perPage\": 50,\"showPartialRows\": false,\"showMetricsAtAllLevels\": false,\"sort\": {\"columnIndex\": null,\"direction\": null},\"showTotal\": false,\"totalFunc\": \"sum\"},\"aggs\": [{\"id\": \"1\",\"enabled\": true,\"type\": \"count\",\"schema\": \"metric\",\"params\": {}},{\"id\": \"2\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"year\",\"size\": 20,\"order\": \"desc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Year\"}},{\"id\": \"3\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"country.keyword\",\"size\": 27,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Country\"}},{\"id\": \"4\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"name.keyword\",\"size\": 10000,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Solution\"}},{\"id\": \"5\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"description.keyword\",\"size\": 10000,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Description\"}},{\"id\": \"6\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"primary_topic.keyword\",\"size\": 10,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Primary topic\"}},{\"id\": \"7\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"secondary_topic.keyword\",\"size\": 10,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Secondary topic\"}}]}",
+      "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"columnIndex\": null,\"direction\": null},\"config\": {\"searchKeyword\": \"\"}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\": \"oth_ec_osor_solutions_index\",\"query\": {\"query\": \"\",\"language\": \"lucene\"},\"filter\": []}"
+      }
+    }
+  },
+  {
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Dashboard_EC OSOR Solutions",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"gridData\": {\"w\": 24,\"h\": 15,\"x\": 0,\"y\": 0,\"i\": \"1\"},\"version\": \"6.8.6\",\"panelIndex\": \"1\",\"type\": \"visualization\",\"id\": \"EC OSOR Solutions\",\"embeddableConfig\": {}}]",
+      "optionsJSON": "{\"darkTheme\": false,\"useMargins\": true,\"hidePanelTitles\": false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\": {\"query\": \"\",\"language\": \"lucene\"},\"filter\": []}"
+      }
+    }
+  }
+]

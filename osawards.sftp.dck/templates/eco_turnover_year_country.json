@@ -1,0 +1,71 @@
+[
+  {
+    "mappings": {
+      "properties": {
+        "year": {
+          "type": "long"
+        },
+        "country_code": {
+          "type": "keyword"
+        },
+        "contributors": {
+          "type": "long"
+        },
+        "left_contributors": {
+          "type": "long"
+        },
+        "turnover_rate": {
+          "type": "float"
+        }
+      }
+    },
+    "expected_fields": [
+      "year",
+      "country_code",
+      "contributors",
+      "left_contributors",
+      "turnover_rate"
+    ],
+    "filters": {
+      "countries": true,
+      "lower_year_limit": 2008,
+      "upper_year_limit": 2024
+    },
+    "country_limit": 10
+  },
+  {
+    "type": "index-pattern",
+    "index-pattern": {
+      "title": "eco_turnover_year_country_index",
+      "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"country_code\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country_code.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"country\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"contributors\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"left_contributors\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"turnover_rate\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"year\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+    }
+  },
+  {
+    "type": "visualization",
+    "visualization": {
+      "title": "GitHub Turnover Rate (Top 10 Countries)",
+      "visState": "{\"title\": \"GitHub Turnover Rate (Top 10 Countries)\",\"type\": \"heatmap\",\"params\": {\"addLegend\": true,\"addTooltip\": true,\"colorSchema\": \"Green to Red\",\"colorsNumber\": 4,\"colorsRange\": [],\"enableHover\": false,\"invertColors\": false,\"legendPosition\": \"right\",\"percentageMode\": true,\"setColorRange\": false,\"times\": [],\"type\": \"heatmap\",\"valueAxes\": [{\"id\": \"ValueAxis-1\",\"labels\": {\"color\": \"#555\",\"overwriteColor\": false,\"rotate\": 0,\"show\": true},\"scale\": {\"defaultYExtents\": false,\"type\": \"linear\"},\"show\": false,\"type\": \"value\"}]},\"aggs\": [{\"id\": \"1\",\"enabled\": true,\"type\": \"sum\",\"schema\": \"metric\",\"params\": {\"field\": \"turnover_rate\",\"customLabel\": \"Turnover rate\"}},{\"id\": \"2\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"segment\",\"params\": {\"field\": \"year\",\"size\": 20,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Year\"}},{\"id\": \"3\",\"enabled\": true, \"type\": \"terms\",\"schema\": \"group\",\"params\": {\"field\": \"country.keyword\",\"size\": 10,\"order\": \"asc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Country\"}}]}",
+      "uiStateJSON": "{\"vis\": {\"defaultColors\": {\"0% - 25%\": \"rgb(0,104,55)\",\"25% - 50%\": \"rgb(135,203,103)\",\"50% - 75%\": \"rgb(255,255,190)\",\"75% - 100%\": \"rgb(249,142,82)\"}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\": \"eco_turnover_year_country_index\", \"query\": {\"language\": \"lucene\", \"query\": \"\"}, \"filter\": []}"
+      }
+    }
+  },
+  {
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Dashboard_GitHub Turnover Rate (Top 10 Countries)",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"gridData\": {\"w\": 24, \"h\": 15, \"x\": 0, \"y\": 0, \"i\": \"1\"}, \"version\": \"6.8.6\", \"panelIndex\": \"1\", \"type\": \"visualization\", \"id\": \"GitHub Turnover Rate (Top 10 Countries)\", \"embeddableConfig\": {}}]",
+      "optionsJSON": "{\"darkTheme\": false, \"useMargins\": true, \"hidePanelTitles\": false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"\"}}"
+      }
+    }
+  }
+]

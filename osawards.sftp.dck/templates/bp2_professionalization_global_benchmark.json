@@ -1,0 +1,63 @@
+[
+  {
+    "mappings": {
+      "properties": {
+        "year": {
+          "type": "long"
+        },
+        "country_code": {
+          "type": "keyword"
+        },
+        "repo_ownership_intensity": {
+          "type": "float"
+        }
+      }
+    },
+    "expected_fields": [
+      "year",
+      "country_code",
+      "repo_ownership_intensity"
+    ],
+    "filters": {
+      "countries": true,
+      "lower_year_limit": 2010,
+      "upper_year_limit": 2023
+    },
+    "country_limit": 6
+  },
+  {
+    "type": "index-pattern",
+    "index-pattern": {
+      "title": "bp2_professionalization_global_benchmark_index",
+      "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"country_code\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country_code.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"country\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"repo_ownership_intensity\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"year\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+    }
+  },
+  {
+    "type": "visualization",
+    "visualization": {
+      "title": "Professionalization: Repositories per Organization",
+      "visState": "{\"title\": \"Professionalization: Repositories per Organization\",\"type\": \"line\",\"params\": {\"addLegend\": true,\"addTimeMarker\": false,\"addTooltip\": true,\"categoryAxes\": [{\"id\": \"CategoryAxis-1\",\"labels\": {\"show\": true,\"truncate\": 100},\"position\": \"bottom\",\"scale\": {\"type\": \"linear\"},\"show\": true,\"style\": {},\"title\": {},\"type\": \"category\"}],\"grid\": {\"categoryLines\": false,\"style\": {\"color\": \"#eee\"},\"valueAxis\": \"ValueAxis-1\"},\"legendPosition\": \"right\",\"seriesParams\": [{\"data\": {\"id\": \"1\",\"label\": \"Repositories / Organizations\"},\"drawLinesBetweenPoints\": true,\"mode\": \"normal\",\"show\": \"true\",\"showCircles\": true,\"type\": \"line\",\"valueAxis\": \"ValueAxis-1\"}],\"times\": [],\"type\": \"line\",\"valueAxes\": [{\"id\": \"ValueAxis-1\",\"labels\": {\"filter\": false,\"rotate\": 0,\"show\": true,\"truncate\": 100},\"name\": \"LeftAxis-1\",\"position\": \"left\",\"scale\": {\"mode\": \"normal\",\"type\": \"linear\"},\"show\": true,\"style\": {},\"title\": {\"text\": \"Repositories / Organizations\"},\"type\": \"value\"}]},\"aggs\": [{\"id\": \"1\",\"enabled\": true,\"type\": \"sum\",\"schema\": \"metric\",\"params\": {\"field\": \"repo_ownership_intensity\",\"customLabel\": \"Repositories / Organizations\"}},{\"id\": \"2\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"segment\",\"params\": {\"field\": \"year\",\"size\": 30,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Year\"}},{\"id\": \"3\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"group\",\"params\": {\"field\": \"country.keyword\",\"size\": 6,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Country\"}}]}",
+      "uiStateJSON": "{\"vis\": {\"legendOpen\": true}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\": \"bp2_professionalization_global_benchmark_index\",\"query\": {\"language\": \"lucene\",\"query\": \"\"},\"filter\": []}"
+      }
+    }
+  },
+  {
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Dashboard_Professionalization: Repositories per Organization",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"gridData\": {\"w\": 24,\"h\": 15,\"x\": 0,\"y\": 0,\"i\": \"1\"},\"version\": \"6.8.6\",\"panelIndex\": \"1\",\"type\": \"visualization\",\"id\": \"Professionalization: Repositories per Organization\",\"embeddableConfig\": {}}]",
+      "optionsJSON": "{\"darkTheme\": false, \"useMargins\": true, \"hidePanelTitles\": false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"\"}}"
+      }
+    }
+  }
+]

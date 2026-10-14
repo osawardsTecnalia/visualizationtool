@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class=" js">
+	
+<head>
+  <title>| Visualization Tool</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+		
+  <link rel="icon" href="https://europeanopensource.academy/sites/default/files/favicon.png" type="image/png">
+  <link rel="stylesheet" media="all" href="assets/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" media="all" href="assets/css/all.min.css"> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" media="all" href="assets/css/swiper-bundle.min.css">
+	<link rel="stylesheet" media="all" href="assets/css/style.min.css">
+	<link rel="stylesheet" media="all" href="assets/css/custom.css">
+  <link rel="stylesheet" media="all" href="assets/css/vt.css">
+</head>
+
+<body class="path-frontpage" style="overflow: auto;">
+	<div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+	  <div class="layout-container">
+      <header id="header" class="navbar-expand-lg py-2">
+        <nav class="navbar navbar-light w-100">
+          <div class="container px-2 d-flex justify-content-between gap-2">
+            <div class="me-auto">
+              <div class="region region-header">
+                <div id="block-skeleton-site-branding" class="clearfix site-branding block block-system block-system-branding-block">
+                  <a href="https://europeanopensource.academy/" title="Home" rel="home" class="site-branding-logo">
+                    <div id="imgData" style="z-index: 2147483647 !important; overflow: auto; clear: both; float: none; width: auto; height: auto; position: absolute; color: white; background-color: rgba(0, 0, 10, 0.8); font: 1rem Arial, Helvetica, sans-serif; padding: 2px 5px; border-radius: 5px; visibility: hidden; opacity: 0;">
+                      <span id="imgData-width">207</span>×
+                      <span id="imgData-height">66</span>&nbsp;
+                      <span id="imgData-extension">svg</span><br>
+                      <span id="imgData-perfSize">23,6 kB</span>
+                    </div>
+                    <img class="logo" src="assets/img/logo-white.svg" alt="Home">
+                    <img class="logo logo-white hidden" src="assets/img/logo.svg" alt="Home">
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="header-one__main-menu">
+              <div class="gva-offcanvas-mobile">
+                <div class="close-offcanvas hidden"><i class="fa fa-times"></i></div>
+                <div class="main-menu-inner">
+                  <div class="region region-primary-menu">
+                    <nav role="navigation" aria-labelledby="block-skeleton-main-menu-menu" id="block-skeleton-main-menu" class="block block-menu navigation menu--main">
+                      <h2 class="visually-hidden" id="block-skeleton-main-menu-menu">Main navigation</h2>
+          
+                      <div class="gva-navigation">
+                        <ul class="gva_menu gva_menu_main">
+                          <!-- Activity Indicators -->
+                          <li class="menu-item menu-item--expanded">
+                            <a href="#"><span>Activity Indicators</span><span class="icaret nav-plus fas fa-chevron-down"></span></a>
+                            <ul class="menu sub-menu" style="min-width:370px!important;">
+                              <!-- Overview -->
+                              <li class="menu-item">
+                                <a href="index_activity.html"><span>Overview</span></a>
+                              </li>
+
+                              <!-- Number of GitHub repositories -->
+                              <li class="menu-item">
+                                <hr style="border: 1px solid #000!important; margin-top: -2px;">
+                                <a href="act_github_repos.html"><span>Number of GitHub repositories</span></a>
+                              </li>
+
+                              <!-- Number of GitHub contributors -->
+                              <li class="menu-item">
+                                <a href="act_github_contributors.html"><span>Number of GitHub contributors</span></a>
+                              </li>
+
+                              <!-- Number of GitHub commits -->
+                              <li class="menu-item">
+                                <a href="act_github_commits.html"><span>Number of GitHub commits</span></a>
+                              </li>
+
+                              <!-- Number of GitHub stars -->
+                              <li class="menu-item">
+                                <a href="act_github_stars.html"><span>Number of GitHub stars</span></a>
+                              </li>
+
+                              <!-- Number of GitHub watches -->
+                              <li class="menu-item">
+                                <a href="act_github_watches.html"><span>Number of GitHub watches</span></a>
+                              </li>
+
+                              <!-- Number of GitHub forks -->
+                              <li class="menu-item">
+                                <a href="act_github_forks.html"><span>Number of GitHub forks</span></a>
+                              </li>
+                            </ul>
+                          </li>
+
+                          <!-- Ecosystem Indicators -->
+                          <li class="menu-item menu-item--expanded">
+                            <a href="#"><span>Ecosystem Indicators</span><span class="icaret nav-plus fas fa-chevron-down"></span></a>
+                            <ul class="menu sub-menu" style="min-width:370px!important;">
+                              <!-- Overview -->
+                              <li class="menu-item">
+                                <a href="index_ecosystem.html"><span>Overview</span></a>
+                              </li>
+
+                              <!-- GitHub Commit Intensity -->
+                              <li class="menu-item">
+                                <hr style="border: 1px solid #000!important; margin-top: -2px;">
+                                <a href="eco_commit_intensity.html"><span>GitHub Commit Intensity</span></a>
+                              </li>
+
+                              <!-- Contributor Density -->
+                              <li class="menu-item">
+                                <a href="eco_contributor_density.html"><span>GitHub Contributor Density</span></a>
+                              </li>
+                              
+                              <!-- Popularity Index -->
+                              <li class="menu-item">
+                                <a href="eco_popularity_index.html"><span>GitHub Popularity Index</span></a>
+                              </li>
+
+                              <!-- GitHub Repository Ownership Intensity -->
+                              <li class="menu-item">
+                                <a href="eco_repo_ownership.html"><span>GitHub Repository Ownership Intensity</span></a>
+                              </li>
+                    
+                              <!-- Retention Rate -->
+                              <li class="menu-item">
+                                <a href="eco_retention_rate.html"><span>GitHub Retention Rate</span></a>
+                              </li>
+
+                              <!-- Turnover Rate -->
+                              <li class="menu-item">
+                                <a href="eco_turnover_rate.html"><span>GitHub Turnover Rate</span></a>
+                              </li>
+                            </ul>
+                          </li>
+                          
+                          <!-- Other Dashboards -->
+                          <li class="menu-item menu-item--expanded">
+                            <a href="#"><span>Other Dashboards</span><span class="icaret nav-plus fas fa-chevron-down"></span></a>
+                            <ul class="menu sub-menu" style="min-width:370px!important;">
+                              <!-- Overview -->
+                              <li class="menu-item">
+                                <a href="index_other.html"><span>Overview</span></a>
+                              </li>
+
+                              <!-- Total Publications -->
+                              <li class="menu-item">
+                                <hr style="border: 1px solid #000!important; margin-top: -2px;">
+                                <a href="oth_publications.html"><span>Total Publications (SCOPUS)</span></a>
+                              </li>
+                              
+                              <!-- OSH Projects -->
+                              <li class="menu-item">
+                                <a href="oth_osh_projects.html"><span>Certified Open-Source Hardware Projects</span></a>
+                              </li>
+
+                              <!-- CERN Projects -->
+                              <li class="menu-item">
+                                <a href="oth_cern_projects.html"><span>CERN Open-Hardware Repository</span></a>
+                              </li>
+
+                              <!-- EC OSOR Solutions -->
+                              <li class="menu-item">
+                                <a href="oth_ec_osor_solutions.html"><span>EC Open-Source Observatory Solutions</span></a>
+                              </li>
+                            </ul>
+                          </li>
+
+                          <li class="menu-item menu-item--expanded">
+                            <a href="#"><span>Blog Posts</span><span class="icaret nav-plus fas fa-chevron-down"></span></a>
+                            <ul class="menu sub-menu" style="min-width:370px!important;">
+                              <!-- Overview -->
+                              <li class="menu-item">
+                                <a href="index_blogposts.html"><span>Overview</span></a>
+                              </li>
+
+                              <!-- Share of EU Repository Creation by Country -->
+                              <li class="menu-item">
+                                <hr style="border: 1px solid #000!important; margin-top: -2px;">
+                                <a href="bp1_share_eu_repo_creation.html"><span>BP1: Share EU Repo Creation by Country</span></a>
+                              </li>
+
+                              <!-- Share of OS Companies by Country in all EU-27 OS Companies -->
+                              <li class="menu-item">
+                                <a href="bp1_share_eu_companies.html"><span>BP1: Share OS Companies in all EU-27 OS Companies</span></a>
+                              </li>
+
+                              <!-- Cumulative Open-Source Repositories -->
+                              <li class="menu-item">
+                                <a href="bp1_cumulative_os_repos.html"><span>BP1: Cumulative Open-Source Repos</span></a>
+                              </li>
+
+                              <!-- Cumulative Share of Global Open-Source Repositories -->
+                              <li class="menu-item">
+                                <a href="bp1_cumulative_global.html"><span>BP1: Cumulative Share Global OS Repos</span></a>
+                              </li>
+
+                              <!-- Professionalization: EU-27 vs United States vs China -->
+                              <li class="menu-item">
+                                <hr style="border: 1px solid #000!important; margin-top: -2px;">
+                                <a href="bp2_professionalization_eu27_us_cn.html"><span>BP2: Prof.: EU-27 vs US vs China</span></a>
+                              </li>
+
+                              <!-- Professionalization: Repositories per Organization -->
+                              <li class="menu-item">
+                                <a href="bp2_professionalization_global_benchmark.html"><span>BP2: Prof.: Repos per Organization</span></a>
+                              </li>
+
+                              <!-- Professionalization: Share of GitHub Commits by EU-27 Countries in 2023 -->
+                              <li class="menu-item">
+                                <a href="bp2_professionalization_share_eu27_commits.html"><span>BP2: Prof.: Share GitHub Commits by EU-27 in 2023</span></a>
+                              </li>
+
+                              <!-- Professionalization: EU-27 Normalized by Population Size -->
+                              <li class="menu-item">
+                                <a href="bp2_professionalization_population_normalized.html"><span>BP2: Prof.: EU-27 Normalized by Population</span></a>
+                              </li>
+
+                              <!-- Maintenance: Commit intensity: The EU-27 in an international comparison -->
+                              <li class="menu-item">
+                                <hr style="border: 1px solid #000!important; margin-top: -2px;">
+                                <a href="bp3_maintenance_commit_intensity.html"><span>BP3: Maint.: Commit intensity: The EU-27 in an international comparison</span></a>
+                              </li>
+
+                              <!-- Maintenance: Retention rate, EU-27 vs United States vs China -->
+                              <li class="menu-item">
+                                <a href="bp3_maintenance_retention.html"><span>BP3: Maint.: Retention, EU-27 vs US vs China</span></a>
+                              </li>
+
+                              <!-- Maintenance: Turnover rate, EU-27 vs United States vs China -->
+                              <li class="menu-item">
+                                <a href="bp3_maintenance_turnover.html"><span>BP3: Main.: Turnover, EU-27 vs US vs China</span></a>
+                              </li>
+
+                              <!-- Maintenance: Commit intensity across the EU-27 countries in 2023 -->
+                              <li class="menu-item">
+                                <a href="bp3_maintenance_commit_intensity_eu27.html"><span>BP3: Maint.: Commit intensity across the EU-27 in 2023</span></a>
+                              </li>
+
+                              <!-- Maintenance: Retention rate across the EU-27 countries in 2023 -->
+                              <li class="menu-item">
+                                <a href="bp3_maintenance_retention_eu27.html"><span>BP3: Maint.: Retention EU-27 in 2023</span></a>
+                              </li>
+
+                              <!-- Maintenance: Turnover rate across the EU-27 countries in 2023 -->
+                              <li class="menu-item">
+                                <a href="bp3_maintenance_turnover_eu27.html"><span>BP3: Maint.: Turnover EU-27 in 2023</span></a>
+                              </li>
+                            </ul>
+                          </li>
+            
+                          <!-- User stories -->
+                          <li class="menu-item menu-item--expanded">
+                            <a href="#"><span>User stories</span><span class="icaret nav-plus fas fa-chevron-down"></span></a>
+                            <ul class="menu sub-menu">
+                              <li class="menu-item">
+                                <a href="index_user_stories.html"><span>Stories contributed by users</span></a>
+                              </li>
+                            </ul>
+                          </li>
+                    
+                          <!-- Reports -->
+                          <li class="menu-item menu-item--expanded">
+                            <a href="#"><span>Reports</span><span class="icaret nav-plus fas fa-chevron-down"></span></a>
+                            <ul class="menu sub-menu">
+                              <li class="menu-item">
+                                <a href="index_reports.html"><span>Available reports</span></a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+  
+      <div class="section-two py-5">
+        <div class="container">
+          <div class="region region-section-two">
+            <div id="block-skeleton-block2025winners" class="block block-block-content block-block-content3a64661e-3722-4464-8d8e-5894e1eaa2ba" style="margin-top: 48px;">
+              <div class="col-11 h-auto">
+                <div class="tab-content h-100" id="v-pills-tabContent">
+                  <div class="ps-5 h-100">
+                    <div class="row ms-0 ms-sm-5 mb-5">
+                      <div class="col-12 col-md-12 h-auto">
+                        <div class="box-blue p-4 d-flex align-items-center h-100 gap-4">
+                          <div class="text-white col-md-12">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                              <p style="font-size: 20pt; margin: 0;">Maintenance: Commit intensity across the EU-27 countries in 2023</p>
+                              <a class="btn btn-primary" href="index_blogposts.html">Back</a>
+                            </div>
+
+                            <!-- Descriptive text -->
+                            <div id="descriptive-text" style="margin-bottom: 8px; font-size: 11pt; text-align: justify;">
+                              Looking at this through the lens of single EU member states, once again a rather fragmented picture emerges. Productivity 
+                              evels are above the EU average in Latvia, Greece, Poland, France, Germany and the Netherlands. All other EU countries show
+                              below average productivity levels in terms of Open Source code production.
+                            </div>
+                            <div id="descriptive-text" style="margin-bottom: 8px; font-size: 11pt; text-align: justify;">
+                              <p style="margin: 0 0 8px 32px; font-weight: 350;">
+                                Source:
+                                <a href="https://europeanopensource.academy/articles-and-blogs/productive-yet-pressured-europes-open-source-maintenance-dilemma" target="_blank" style="color: #c9d4ff; margin-left: 16px">Productive Yet Pressured: Europe’s Open Source Maintenance Dilemma</a>
+                              </p>
+                            </div>
+
+                            <!-- Chart iframe -->
+                            <div class="dashboard-container">
+                              <iframe id="iframe" class="dashboard-iframe" src="https://osawards.digital.tecnalia.dev/app/kibana#/visualize/edit/Maintenance:%20EU-27%20Commit%20Intensity%20in%202023?embed=true">
+                              </iframe>
+                            </div>
+
+                            <!-- Filter: Country is one of -->
+                            <div class="row ms-0 ms-sm-5 mb-5" style="margin-top: 20px;">
+                              <p><strong>Filters:</strong></p>
+                              <div class="col-9 d-flex align-items-center gap-3">
+                                <p id="textcountry" class="mb-0 text-nowrap" style="font-size: 12pt;">Select the Country:</p>
+                                <div id="tag-input" class="form-control d-flex flex-wrap gap-2 flex-grow-1"></div>
+                                <script src="assets/js/vt.js"></script>
+                              </div>
+                              <div class="col-1 col-md-1 h-auto">
+                                <a class="btn btn-primary" href="javascript:applyFilters('https://osawards.digital.tecnalia.dev/app/kibana#/visualize/edit/Maintenance:%20EU-27%20Commit%20Intensity%20in%202023?embed=true', 1)">Apply</a>
+                              </div>
+                              <div class="col-1 col-md-1 h-auto" style="margin-left: 4pt;">
+                                <a class="btn btn-danger" style="height: 36pt; padding-top: 8pt;" href="javascript:removeFilters('https://osawards.digital.tecnalia.dev/app/kibana#/visualize/edit/Maintenance:%20EU-27%20Commit%20Intensity%20in%202023?embed=true', 1)">Remove</a>
+                              </div>
+                            </div>
+
+                            <!-- Share -->
+                            <div class="row ms-0 ms-sm-5 mb-5">
+                              <div class="col-9 d-flex align-items-center gap-3"></div>
+                              <div class="col-1 col-md-1 h-auto"></div>
+                              <div class="col-1 col-md-1 h-auto" style="margin-left: 4pt;">
+                                <a class="btn btn-primary" href="javascript:save('Maintenance: Commit intensity across the EU-27 countries in 2023', 'maintenance_commit_intensity_eu27');">Save</a>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <script src="assets/js/js_Dhu91z75y96gsWY3tJblWnL07NXPWhrjZU5xoviDEmw.js"></script>
+        <script src="assets/js/js_WovJfjhn1cCnnyyQ8hSVPIR0WFG5TEc1ywaA1YX1uG0.js"></script>
+
+      </div>
+      <div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div>
+    </div>
+    <div style="all: initial; position: fixed !important; display: block !important; z-index: 2147483647 !important"></div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+[
+  {
+    "mappings": {
+      "properties": {
+        "year": {
+          "type": "long"
+        },
+        "country_code": {
+          "type": "keyword"
+        },
+        "country": {
+          "type": "keyword"
+        },
+        "num_oss_companies": {
+          "type": "long"
+        },
+        "share_pct": {
+          "type": "float"
+        }
+      }
+    },
+    "expected_fields": [
+      "year",
+      "country_code",
+      "num_oss_companies",
+      "share_pct"
+    ],
+    "filters": {
+      "countries": true,
+      "lower_year_limit": 2025,
+      "upper_year_limit": 2025
+    },
+    "country_limit": 27
+  },
+  {
+    "type": "index-pattern",
+    "index-pattern": {
+      "title": "bp1_share_os_companies_in_all_eu27_os_companies_index",
+      "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"country_code\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country_code.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"country\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"num_oss_companies\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"share_pct\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"year\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+    }
+  },
+  {
+    "type": "visualization",
+    "visualization": {
+      "title": "Share of OS Companies by Country in all EU-27 OS Companies",
+      "visState": "{\"title\": \"Share of OS Companies by Country in all EU-27 OS Companies\",\"type\": \"horizontal_bar\",\"params\": {\"addLegend\": true,\"addTimeMarker\": false,\"addTooltip\": true,\"categoryAxes\": [{\"id\": \"CategoryAxis-1\",\"labels\": {\"filter\": false,\"rotate\": 0,\"show\": true,\"truncate\": 200},\"position\": \"left\",\"scale\": {\"type\": \"linear\"},\"show\": true,\"style\": {},\"title\": {},\"type\": \"category\"}],\"grid\": {\"categoryLines\": true,\"style\": {\"color\": \"#eee\"},\"valueAxis\": \"ValueAxis-1\"},\"legendPosition\": \"right\",\"seriesParams\": [{\"data\": {\"id\": \"1\",\"label\": \"Share of OS Companies by Country (%)\"},\"drawLinesBetweenPoints\": true,\"mode\": \"normal\",\"show\": true,\"showCircles\": true,\"type\": \"histogram\",\"valueAxis\": \"ValueAxis-1\"}],\"times\": [],\"type\": \"histogram\",\"valueAxes\": [{\"id\": \"ValueAxis-1\",\"labels\": {\"filter\": true,\"rotate\": 75,\"show\": true,\"truncate\": 100},\"name\": \"LeftAxis-1\",\"position\": \"bottom\",\"scale\": {\"mode\": \"normal\",\"type\": \"linear\"},\"show\": true,\"style\": {},\"title\": {\"text\": \"Share of OS Companies by Country (%)\"},\"type\": \"value\"}]},\"aggs\": [{\"id\": \"1\",\"enabled\": true,\"type\": \"sum\",\"schema\": \"metric\",\"params\": {\"field\": \"share_pct\",\"customLabel\": \"Share of OS Companies by Country (%)\"}},{\"id\": \"2\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"segment\",\"params\": {\"field\": \"country.keyword\",\"size\": 30,\"order\": \"desc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Country\"}}]}",
+      "uiStateJSON": "{\"vis\": {\"colors\": {\"Sum of share_pct\": \"#1F78C1\"},\"legendOpen\": false}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\": \"bp1_share_os_companies_in_all_eu27_os_companies_index\", \"query\": {\"language\": \"lucene\", \"query\": \"\"}, \"filter\": []}"
+      }
+    }
+  },
+  {
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Dashboard_Share of OS Companies by Country in all EU-27 OS Companies",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"gridData\": {\"w\": 24, \"h\": 15, \"x\": 0, \"y\": 0, \"i\": \"1\"}, \"version\": \"6.8.6\", \"panelIndex\": \"1\", \"type\": \"visualization\", \"id\": \"Share of OS Companies by Country in all EU-27 OS Companies\", \"embeddableConfig\": {}}]",
+      "optionsJSON": "{\"darkTheme\": false, \"useMargins\": true, \"hidePanelTitles\": false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"\"}}"
+      }
+    }
+  }
+]

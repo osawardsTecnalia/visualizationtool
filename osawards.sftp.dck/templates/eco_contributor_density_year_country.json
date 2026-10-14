@@ -1,0 +1,71 @@
+[
+  {
+    "mappings": {
+      "properties": {
+        "year": {
+          "type": "long"
+        },
+        "country_code": {
+          "type": "keyword"
+        },
+        "contributors": {
+          "type": "long"
+        },
+        "repositories": {
+          "type": "long"
+        },
+        "contributor_density": {
+          "type": "float"
+        }
+      }
+    },
+    "expected_fields": [
+      "year",
+      "country_code",
+      "contributors",
+      "repositories",
+      "contributor_density"
+    ],
+    "filters": {
+      "countries": true,
+      "lower_year_limit": 2008,
+      "upper_year_limit": 2024
+    },
+    "country_limit": 10
+  },
+  {
+    "type": "index-pattern",
+    "index-pattern": {
+      "title": "eco_contributor_density_year_country_index",
+      "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"country_code\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country_code.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"country\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"contributors\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"repositories\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"contributor_density\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"year\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+    }
+  },
+  {
+    "type": "visualization",
+    "visualization": {
+      "title": "GitHub Contributor Density (Top 10 Countries)",
+      "visState": "{\"title\": \"GitHub Contributor Density (Top 10 Countries)\",\"type\": \"line\",\"params\": {\"type\": \"line\",\"grid\": {\"categoryLines\": true,\"style\": {\"color\": \"#eee\"},\"valueAxis\": \"ValueAxis-1\"},\"categoryAxes\": [{\"id\": \"CategoryAxis-1\",\"type\": \"category\",\"position\": \"bottom\",\"show\": true,\"style\": {},\"scale\": {\"type\": \"linear\"},\"labels\": {\"show\": true,\"truncate\": 100},\"title\": {}}],\"valueAxes\": [{\"id\": \"ValueAxis-1\",\"name\": \"LeftAxis-1\",\"type\": \"value\",\"position\": \"left\",\"show\": true,\"style\": {},\"scale\": {\"type\": \"linear\",\"mode\": \"normal\"},\"labels\": {\"show\": true,\"rotate\": 0,\"filter\": false,\"truncate\": 100},\"title\": {\"text\": \"Contributors / Repository\"}}],\"seriesParams\": [{\"show\": \"true\",\"type\": \"line\",\"mode\": \"normal\",\"data\": {\"label\": \"Contributors / Repository\",\"id\": \"1\"},\"valueAxis\": \"ValueAxis-1\",\"drawLinesBetweenPoints\": true,\"showCircles\": true}],\"addTooltip\": true,\"addLegend\": true,\"legendPosition\": \"right\",\"times\": [],\"addTimeMarker\": false},\"aggs\": [{\"id\": \"1\",\"enabled\": true,\"type\": \"sum\",\"schema\": \"metric\",\"params\": {\"field\": \"contributor_density\",\"customLabel\": \"Contributors / Repository\"}},{\"id\": \"2\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"segment\",\"params\": {\"field\": \"year\",\"size\": 20,\"order\": \"asc\",\"orderBy\": \"_key\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Year\"}},{\"id\": \"3\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"group\",\"params\": {\"field\": \"country.keyword\",\"size\": 10,\"order\": \"asc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Country\"}}]}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\": \"eco_contributor_density_year_country_index\", \"query\": {\"query\": \"\", \"language\": \"lucene\"}, \"filter\": []}"
+      }
+    }
+  },
+  {
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Dashboard_GitHub Contributor Density (Top 10 Countries)",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"gridData\": {\"w\": 24, \"h\": 15, \"x\": 0, \"y\": 0, \"i\": \"1\"}, \"version\": \"6.8.6\", \"panelIndex\": \"1\", \"type\": \"visualization\", \"id\": \"GitHub Contributor Density (Top 10 Countries)\", \"embeddableConfig\": {}}]",
+      "optionsJSON": "{\"darkTheme\": false, \"useMargins\": true, \"hidePanelTitles\": false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"\"}}"
+      }
+    }
+  }
+]

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class=" js">
+	
+<head>
+  <title>| Visualization Tool</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+		
+  <link rel="icon" href="https://europeanopensource.academy/sites/default/files/favicon.png" type="image/png">
+  <link rel="stylesheet" media="all" href="assets/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" media="all" href="assets/css/all.min.css"> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" media="all" href="assets/css/swiper-bundle.min.css">
+	<link rel="stylesheet" media="all" href="assets/css/style.min.css">
+	<link rel="stylesheet" media="all" href="assets/css/custom.css">
+  <link rel="stylesheet" media="all" href="assets/css/vt.css">
+</head>
+
+<body class="path-frontpage" style="overflow: auto;">
+	<div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+	  <div class="layout-container">
+      <header id="header" class="navbar-expand-lg py-2">
+        <nav class="navbar navbar-light w-100">
+          <div class="container px-2 d-flex justify-content-between gap-2">
+            <div class="me-auto">
+              <div class="region region-header">
+                <div id="block-skeleton-site-branding" class="clearfix site-branding block block-system block-system-branding-block">
+                  <a href="https://europeanopensource.academy/" title="Home" rel="home" class="site-branding-logo">
+                    <div id="imgData" style="z-index: 2147483647 !important; overflow: auto; clear: both; float: none; width: auto; height: auto; position: absolute; color: white; background-color: rgba(0, 0, 10, 0.8); font: 1rem Arial, Helvetica, sans-serif; padding: 2px 5px; border-radius: 5px; visibility: hidden; opacity: 0;">
+                      <span id="imgData-width">207</span>×
+                      <span id="imgData-height">66</span>&nbsp;
+                      <span id="imgData-extension">svg</span><br>
+                      <span id="imgData-perfSize">23,6 kB</span>
+                    </div>
+                    <img class="logo" src="assets/img/logo-white.svg" alt="Home">
+                    <img class="logo logo-white hidden" src="assets/img/logo.svg" alt="Home">
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="header-one__main-menu">
+              <div class="gva-offcanvas-mobile">
+                <div class="close-offcanvas hidden"><i class="fa fa-times"></i></div>
+                <div class="main-menu-inner">
+                  <div class="region region-primary-menu">
+                    <nav role="navigation" aria-labelledby="block-skeleton-main-menu-menu" id="block-skeleton-main-menu" class="block block-menu navigation menu--main">
+                      <h2 class="visually-hidden" id="block-skeleton-main-menu-menu">Main navigation</h2>
+          
+                      <div class="gva-navigation">
+                      </div>
+
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+  
+      <div class="section-two py-5">
+        <div class="container">
+          <div class="region region-section-two">
+            <div id="block-skeleton-block2025winners" class="block block-block-content block-block-content3a64661e-3722-4464-8d8e-5894e1eaa2ba" style="margin-top: 48px;">
+              <div class="col-11 h-auto">
+                <div class="tab-content h-100" id="v-pills-tabContent">
+                  <div class="ps-5 h-100">
+                    <div class="row ms-0 ms-sm-5 mb-5">
+                      <div class="col-12 col-md-12 h-auto">
+                        <div class="box-blue p-4 d-flex align-items-center h-100 gap-4">
+                          <div class="text-white col-md-12">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                              <p style="font-size: 20pt; margin: 0;">Professionalization: EU-27 Normalized by Population Size</p>
+                              <a class="btn btn-primary" href="index2.html">Back</a>
+                            </div>
+
+                            <!-- Descriptive text -->
+                            <div id="descriptive-text" style="margin-bottom: 8px; font-size: 11pt; text-align: justify;">
+                              Analyses regarding the professionalization of the open-source software (OSS) ecosystem in the EU-27 reveal a landscape in
+                              which a balanced profile emerges. Smaller countries—such as Latvia, Ireland, Cyprus, Romania, Slovakia, and Greece—show
+                              comparatively high levels of professionalization; this reinforces the argument for emerging economies regarding how to
+                              leverage the opportunities offered by open source.
+                            </div>
+                            <div id="descriptive-text" style="margin-bottom: 8px; font-size: 11pt; text-align: justify;">
+                              When data are adjusted for population size, the disparity between Member States actually narrows, suggesting that—despite
+                              apparent fragmentation at first glance—these countries share more similarities than differences when their respective population
+                              sizes are taken into account.
+                            </div>
+                            <div id="descriptive-text" style="margin-bottom: 8px; font-size: 11pt; text-align: justify;">
+                              <p style="margin: 0 0 8px 32px; font-weight: 350;">
+                                Source:
+                                <a href="https://europeanopensource.academy/articles-and-blogs/open-source-community-formation-professionalisation" target="_blank" style="color: #c9d4ff; margin-left: 16px">The Open Source Community: From Formation to Professionalisation</a>
+                              </p>
+                            </div>
+
+                            <!-- Chart iframe -->
+                            <div class="dashboard-container">
+                              <iframe id="iframe" class="dashboard-iframe" src="https://osawards.digital.tecnalia.dev/app/kibana#/visualize/edit/Professionalization:%20EU-27%20Normalized%20by%20Population%20Size?embed=true">
+                              </iframe>
+                            </div>
+
+                            <!-- Filter: Country is one of -->
+                            <div class="row ms-0 ms-sm-5 mb-5" style="margin-top: 20px;">
+                              <p><strong>Filters:</strong></p>
+                              <div class="col-9 d-flex align-items-center gap-3">
+                                <p id="textcountry" class="mb-0 text-nowrap" style="font-size: 12pt;">Select the Country:</p>
+                                <div id="tag-input" class="form-control d-flex flex-wrap gap-2 flex-grow-1"></div>
+                                <script src="assets/js/vt.js"></script>
+                              </div>
+                              <div class="col-1 col-md-1 h-auto">
+                                <a class="btn btn-primary" href="javascript:applyFilters('https://osawards.digital.tecnalia.dev/app/kibana#/visualize/edit/Professionalization:%20EU-27%20Normalized%20by%20Population%20Size?embed=true', 1)">Apply</a>
+                              </div>
+                              <div class="col-1 col-md-1 h-auto" style="margin-left: 4pt;">
+                                <a class="btn btn-danger" style="height: 36pt; padding-top: 8pt;" href="javascript:removeFilters('https://osawards.digital.tecnalia.dev/app/kibana#/visualize/edit/Professionalization:%20EU-27%20Normalized%20by%20Population%20Size?embed=true', 1)">Remove</a>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <script src="assets/js/js_Dhu91z75y96gsWY3tJblWnL07NXPWhrjZU5xoviDEmw.js"></script>
+        <script src="assets/js/js_WovJfjhn1cCnnyyQ8hSVPIR0WFG5TEc1ywaA1YX1uG0.js"></script>
+
+      </div>
+      <div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div>
+    </div>
+    <div style="all: initial; position: fixed !important; display: block !important; z-index: 2147483647 !important"></div>
+</body>
+</html>

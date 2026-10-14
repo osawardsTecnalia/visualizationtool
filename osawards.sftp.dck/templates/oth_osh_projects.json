@@ -1,0 +1,83 @@
+[
+  {
+    "mappings": {
+      "properties": {
+        "country_code": {
+          "type": "keyword"
+        },
+        "project_name": {
+          "type": "keyword"
+        },
+        "website": {
+          "type": "keyword"
+        },
+        "primary_type": {
+          "type": "keyword"
+        },
+        "additional_type": {
+          "type": "keyword"
+        },
+        "hardware_license": {
+          "type": "long"
+        },
+        "software_license": {
+          "type": "long"
+        },
+        "status_flag": {
+          "type": "float"
+        }
+      }
+    },
+    "expected_fields": [
+      "country_code",
+      "project_name",
+      "website",
+      "primary_type",
+      "additional_type",
+      "hardware_license",
+      "software_license",
+      "status_flag"
+    ],
+    "filters": {
+      "countries": true,
+      "lower_year_limit": -1,
+      "upper_year_limit": -1
+    },
+    "country_limit": 100
+  },
+  {
+    "type": "index-pattern",
+    "index-pattern": {
+      "title": "oth_osh_projects_index",
+      "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"country_code\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country_code.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"country\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"country.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_name.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"website.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"primary_type.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"hardware_license.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"software_license.keyword\",\"type\":\"string\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"status_flag\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+    }
+  },
+  {
+    "type": "visualization",
+    "visualization": {
+      "title": "OSH Projects",
+      "visState": "{\"title\": \"OSH Projects\",\"type\": \"table\",\"params\": {\"perPage\": 50,\"showPartialRows\": false,\"showMetricsAtAllLevels\": false,\"sort\": {\"columnIndex\": null,\"direction\": null},\"showTotal\": false,\"totalFunc\": \"sum\"},\"aggs\": [{\"id\": \"1\",\"enabled\": true,\"type\": \"count\",\"schema\": \"metric\",\"params\": {}},{\"id\": \"2\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"project_name.keyword\",\"size\": 1000,\"order\": \"desc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": true,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Project\"}},{\"id\": \"3\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"country.keyword\",\"size\": 1000,\"order\": \"desc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Country\"}},{\"id\": \"4\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"primary_type.keyword\",\"size\": 1000,\"order\": \"desc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Type\"}},{\"id\": \"5\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"hardware_license.keyword\",\"size\": 1000,\"order\": \"desc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Hardware License\"}},{\"id\": \"6\",\"enabled\": true,\"type\": \"terms\",\"schema\": \"bucket\",\"params\": {\"field\": \"software_license.keyword\",\"size\": 1000,\"order\": \"desc\",\"orderBy\": \"1\",\"otherBucket\": false,\"otherBucketLabel\": \"Other\",\"missingBucket\": false,\"missingBucketLabel\": \"Missing\",\"customLabel\": \"Software License\"}}]}",
+      "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"columnIndex\": null,\"direction\": null},\"config\": {\"searchKeyword\": \"\"}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\": \"oth_osh_projects_index\",\"query\": {\"query\": \"\",\"language\": \"lucene\"},\"filter\": []}"
+      }
+    }
+  },
+  {
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Dashboard_OSH Projects",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"gridData\": {\"w\": 24,\"h\": 15,\"x\": 0,\"y\": 0,\"i\": \"1\"},\"version\": \"6.8.6\",\"panelIndex\": \"1\",\"type\": \"visualization\",\"id\": \"OSH Projects\",\"embeddableConfig\": {}}]",
+      "optionsJSON": "{\"darkTheme\": false,\"useMargins\": true,\"hidePanelTitles\": false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\": {\"query\": \"\",\"language\": \"lucene\"},\"filter\": []}"
+      }
+    }
+  }
+]
